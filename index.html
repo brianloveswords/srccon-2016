@@ -42,7 +42,7 @@
 
 </style>
 
-<div id="content" class="hidden">
+<div id="content" class="hidde">
 
 <section>
   <h1>Beyond <code>console.log</code></h1>
@@ -53,10 +53,10 @@
   <h1>Introduction</h1>
 </section>
 
-<!-- console.group  -->
+<!-- console.log  -->
 <section>
   <h1><code>console.log()</code></h1>
-  <h2>Different call signatures though?</h2>
+  <h2>Alternate call signatures & formatters</h2>
 
   <pre><code contenteditable>
 // Old standby
@@ -71,6 +71,47 @@ console.log('prefix:', {x: 'some object', y: 10}, 'then some more');
 // Displaying element as HTML vs as an object
 console.log('little o (%o) vs big O (%O)', document, document);
   </code></pre>
+</section>
+
+
+<!-- console.info, console.warn  -->
+<section>
+  <h1><code>console.info()<br>console.warn()</code></h1>
+  <h2>Some preset style, useful with filters</h2>
+
+  <pre><code contenteditable>
+console.info('this is some information that might be useful, whatever');
+
+console.warn('this could be an issue');
+
+console.warn('%calso supports formatters', 'color: #f0f');
+  </code></pre>
+</section>
+
+<!-- console.info, console.warn  -->
+<section>
+  <h1><code>console.error()<br>console.trace()</code></h1>
+  <h2>Stack traces!</h2>
+  <pre><code contenteditable>
+function foo() {
+  console.info('entering foo');
+  bar();
+}
+
+function bar() {
+  console.info('entering bar');
+  baz();
+}
+
+function baz() {
+  console.info('entering baz');
+  console.trace('from baz');
+  console.error('this should not have happened');
+}
+
+foo();
+  </code></pre>
+
 </section>
 
 
@@ -127,7 +168,13 @@ setInterval(_ => debug('module2', 'something unrelated'), 4000);
 setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
   </code></pre>
 </section>
+
+<section>
+  <h1>Event Listener Breakpoints</h1>
+</section>
+
 </div>
+
 
 <!-- dnt -->
 <link rel="stylesheet" href="highlight/styles/monokai-sublime.css">

@@ -1,17 +1,17 @@
-const _setInterval = setInterval;
-const intervals = [ ];
+// const _setInterval = setInterval;
+// const intervals = [ ];
 
-window.setInterval = function(...rest) {
-  intervals.push(_setInterval.apply(window, rest));
-};
+// window.setInterval = function(...rest) {
+//   intervals.push(_setInterval.apply(window, rest));
+// };
 
-window.reset = function() {
-  intervals.forEach( t => window.clearInterval(t));
-};
+// window.reset = function() {
+//   intervals.forEach( t => window.clearInterval(t));
+// };
 
 function triggerHighlight() {
-  document.body.classList.add('highlight');
-  _setInterval( _ => document.body.classList.remove('highlight'), 0);
+  // document.body.classList.add('highlight');
+  // _setInterval( _ => document.body.classList.remove('highlight'), 0);
 }
 
 function savePage() {
@@ -38,9 +38,11 @@ function clickHandler(event) {
   savePage();
   triggerHighlight();
 
-  let script = document.createElement('script');
-  script.innerHTML = this.innerText;
-  document.body.appendChild(script);
+  // let script = document.createElement('script');
+  // script.innerHTML = this.innerText;
+  // document.body.appendChild(script);
+
+  eval(this.innerText);
 
   return false;
 }
@@ -52,4 +54,5 @@ function hookUpEventListeners() {
   });
 }
 
-loadPage();
+// loadPage();
+hookUpEventListeners();
