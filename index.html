@@ -4,6 +4,7 @@
     font-family: sans-serif;
     /* background-color: transparent; */
     transition: background-color 500ms;
+    padding-bottom: 10em;
   }
 
   body.highlight {
@@ -12,11 +13,11 @@
   }
 
   section {
-    min-height: 600px;
+    min-height: 800px;
     width: 1000px;
     padding: 1em;
     margin: auto;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #fefefe;
   }
 
   h1,h2,h3 {
@@ -37,6 +38,7 @@
 
 </style>
 
+<div id="content">
 
 <section>
   <h1>Beyond <code>console.log</code></h1>
@@ -53,10 +55,17 @@
   <h2>Different call signatures though?</h2>
 
   <pre><code contenteditable>
-console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
+// Old standby
 console.log('this is normal');
+
+// Styling with CSS!
+console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
+
+// Can take multiple arguments, will separate them with a space
 console.log('prefix:', {x: 'some object', y: 10}, 'then some more');
-console.log('littte o (%o) vs big O (%O)', document, document);
+
+// Displaying element as HTML vs as an object
+console.log('little o (%o) vs big O (%O)', document, document);
   </code></pre>
 </section>
 
@@ -78,16 +87,43 @@ console.groupEnd();
 <section>
   <h1>Doesn't work great async though</h1>
   <pre><code contenteditable>
-setTimeout(_ => console.log('sup'), 100);
-onsole.group('do the stuff');
-// Until console.groupEnd() is called, every `console.*` call will end up in a
-// collapsable group called 'do the stuff'
-console.log('this is how we do it');
-console.trace('trace from doingTheStuff');
-console.groupEnd();
+setInterval(_ => {
+  console.group('time1');
+  console.log('this is a member of time1');
+  console.groupEnd('time1');
+}, 997);
+
+setInterval(_ => {
+  console.group('time2');
+  console.log('this is a member of time2');
+  console.groupEnd('time2');
+}, 911);
   </code></pre>
 </section>
 
+
+<!-- console.group, pt3  -->
+<section>
+  <h1>A solution I have used</h1>
+    <pre><code contenteditable>
+function debug(prefix, msg, ...rest) {
+  // Short-circuit on production. Use a conditional build script
+  // system to include a script that sets this global state.
+  if (window.ENVIRONMENT === 'production') {
+    return true;
+  }
+
+  console.log(`%c:${prefix}:%c ${msg}`,
+              'font-weight: bold; color: #dcd;', '', ...rest);
+}
+
+setInterval(_ => debug('noise', Date.now()), 2000);
+setInterval(_ => debug('module1', 'this is something, eh? %O%', document.body), 3000);
+setInterval(_ => debug('module2', 'something unrelated'), 4000);
+setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
+  </code></pre>
+</section>
+</div>
 
 <!-- dnt -->
 <link rel="stylesheet" href="highlight/styles/monokai-sublime.css">
