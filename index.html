@@ -1,15 +1,33 @@
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-size: 12pt;
     font-family: sans-serif;
-    /* background-color: transparent; */
-    transition: background-color 500ms;
     padding-bottom: 10em;
   }
 
-  body.highlight {
-    background-color: papayawhip;
-    transition: background-color 0s;
+  pre code {
+    opacity: 0.9;
+    transition: outline 500ms, opacity 333ms;
+  }
+
+  pre code:hover {
+    opacity: 0.95;
+  }
+
+
+  pre code:focus {
+    opacity: 1;
+    outline: .25em solid papayawhip;
+  }
+
+
+  pre code.highlight {
+    outline: .5em solid #f0f;
+    transition: outline 500ms;
   }
 
   section {
@@ -25,14 +43,14 @@
   }
 
   h1 {
-    font-size: 3em;
+    font-size: 4em;
   }
 
   h2 {
-    font-size: 2em;
+    font-size: 3em;
   }
 
-  code {
+  pre code {
     font-size: 1.4em;
   }
 
@@ -42,7 +60,7 @@
 
 </style>
 
-<div id="content" class="hidde">
+<div id="content">
 
 <section>
   <h1>Beyond <code>console.log</code></h1>
@@ -69,9 +87,25 @@ console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
 console.log('prefix:', {x: 'some object', y: 10}, 'then some more');
 
 // Displaying element as HTML vs as an object
-console.log('little o (%o) vs big O (%O)', document, document);
+console.log('HTML (%o) vs Object (%O)', document, document);
   </code></pre>
 </section>
+
+
+<!-- console.dir  -->
+<section>
+  <h1><code>console.dir()</code></h1>
+  <h2>Alias for <code>console.log('%O', thing)</code></h2>
+  <p>When I'm logging objects, I tend to use this over console.log because I usually want to inspect properties and I care less about HTML representation.</p>
+  <pre><code contenteditable>
+// Explore the HTML contained in the document
+console.log(document);
+
+// Explore the JavaScript properties attached to the document object
+console.dir(document);
+  </code></pre>
+</section>
+
 
 
 <!-- console.info, console.warn  -->
@@ -87,6 +121,8 @@ console.warn('this could be an issue');
 console.warn('%calso supports formatters', 'color: #f0f');
   </code></pre>
 </section>
+
+
 
 <!-- console.info, console.warn  -->
 <section>

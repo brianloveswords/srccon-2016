@@ -10,8 +10,6 @@
 // };
 
 function triggerHighlight() {
-  // document.body.classList.add('highlight');
-  // _setInterval( _ => document.body.classList.remove('highlight'), 0);
 }
 
 function savePage() {
@@ -36,7 +34,9 @@ function clickHandler(event) {
   }
 
   savePage();
-  triggerHighlight();
+
+  this.classList.add('highlight');
+  setTimeout( _ => this.classList.remove('highlight'), 500);
 
   // let script = document.createElement('script');
   // script.innerHTML = this.innerText;
