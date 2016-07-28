@@ -23,7 +23,11 @@ function savePage() {
 function loadPage() {
   let element = document.getElementById('content');
   let content = localStorage.getItem('content');
-  element.innerHTML = content;
+  if (content && content.length) {
+    element.innerHTML = content;
+  }
+  element.classList.remove('hidden');
+  hookUpEventListeners();
 }
 
 function clickHandler(event) {
@@ -41,11 +45,11 @@ function clickHandler(event) {
   return false;
 }
 
-let elements = Array.from(document.querySelectorAll('pre > code'));
-elements.forEach(el => {
-  el.addEventListener('click', clickHandler);
-});
+function hookUpEventListeners() {
+  let elements = Array.from(document.querySelectorAll('pre > code'));
+  elements.forEach(el => {
+    el.addEventListener('click', clickHandler);
+  });
+}
 
 loadPage();
-// Autosaver
-// setInterval(savePage, 5000);
