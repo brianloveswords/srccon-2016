@@ -1,0 +1,77 @@
+* SRCCON planning
+** Introduction
+- introduce yourselves
+- favorite debugging tool
+- gnarliest bug you've had to work with
+  - how did you figure it out?
+
+
+** Keyboard Shortcut
+- Cmd+Option+I: Open the inspector.
+- Ctrl+L: Clear the console.
+
+** Console API
+*** Basic Logging
+
+**** console.log
+I know y'all know about this but did you know about alternative call signatures and formatters?
+
+%c - Add some CSS styling.
+
+`console.log('this is an object', object)`;
+`console.log('%cthis is a travesty', 'font-weight: bold;font-size: 10em;')`;
+
+**** console.dir
+
+Alias for `console.log('%O', thing)`. When I'm logging objects, I tend to use this over console.log because I usually want to inspect properties and I care less about HTML representation.
+
+**** console.info
+Has the blue "info" icon. This can take formatters.
+
+**** console.warn
+Has the yellow "warning" icon and a yellow background.
+
+**** console.error / console.trace
+Both spit out a stack trace, but error is styled to stand out as an error with a "error" icon and a red background. `console.error` does not trigger a break-on-exception (nor does `console.trace`, which I'll talk about a bit later.
+
+*** Advanced Logging
+
+**** console.group (console.groupCollapsed) / console.groupEnd
+
+These are good for batching up logs in synchronous functions.
+
+(note: groupCollapsed is WIP for Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1088360)
+
+***** Grouping across async functions: prefix + filter
+
+A technique I've used in the past for logging across async functions is having a standard prefix (usually with a wrapper function + formatter) for the things I'm trying to log and using the console's filter.
+
+**** console.time / console.timeEnd
+
+**** console.table
+
+`console.table(collection, [arrayOfFields]);`
+
+This is really useful if you want to compare fields in a collection, either an object containing similar objects (associative array) or an array.
+
+
+**** console.assert
+Triggers a break-on-exception in
+
+
+*** Standardization
+
+Some of the weirder stuff doesn't work in every browser but there's a standardization effort underway at https://github.com/whatwg/console. For example, `console.assert` failures cause a break-on-exception in Safari and Chrome but not Firefox. I opened an issue to discuss it (https://github.com/whatwg/console/issues/62) and plan on filing a bug with the appropriate browsers once it's determined what the standard behavior should be.
+
+**** Inconsistencies I found working on this session
+- formatters for `group` functions work in Chrome, not in Firefox
+- `groupCollapsed` doesn't seem to work in Firefox (doesn't start collapsed);
+- `console.trace` is open by default in Firefox, collapsed by default in Chrome
+
+
+** Step debugger
+** Break on exception
+** Other
+*** Disable network cache
+- Network tab on Chrome
+-

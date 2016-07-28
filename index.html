@@ -1,0 +1,96 @@
+<style>
+  body {
+    font-size: 12pt;
+    font-family: sans-serif;
+    /* background-color: transparent; */
+    transition: background-color 500ms;
+  }
+
+  body.highlight {
+    background-color: papayawhip;
+    transition: background-color 0s;
+  }
+
+  section {
+    min-height: 600px;
+    width: 1000px;
+    padding: 1em;
+    margin: auto;
+    border-bottom: 1px solid #eee;
+  }
+
+  h1,h2,h3 {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  code {
+    font-size: 1.4em;
+  }
+
+</style>
+
+
+<section>
+  <h1>Beyond <code>console.log</code></h1>
+  <h2>Making the most of your developer tools</h2>
+</section>
+
+<section>
+  <h1>Introduction</h1>
+</section>
+
+<!-- console.group  -->
+<section>
+  <h1><code>console.log()</code></h1>
+  <h2>Different call signatures though?</h2>
+
+  <pre><code contenteditable>
+console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
+console.log('this is normal');
+console.log('prefix:', {x: 'some object', y: 10}, 'then some more');
+console.log('littte o (%o) vs big O (%O)', document, document);
+  </code></pre>
+</section>
+
+
+<!-- console.group  -->
+<section>
+  <h1><code>console.group()</code></h1>
+  <pre><code contenteditable>
+console.group('do the stuff');
+// Until console.groupEnd() is called, every `console.*` call will end up in a
+// collapsable group called 'do the stuff'
+console.log('this is how we do it');
+console.trace('trace from doingTheStuff');
+console.groupEnd();
+  </code></pre>
+</section>
+
+<!-- console.group, pt2  -->
+<section>
+  <h1>Doesn't work great async though</h1>
+  <pre><code contenteditable>
+setTimeout(_ => console.log('sup'), 100);
+onsole.group('do the stuff');
+// Until console.groupEnd() is called, every `console.*` call will end up in a
+// collapsable group called 'do the stuff'
+console.log('this is how we do it');
+console.trace('trace from doingTheStuff');
+console.groupEnd();
+  </code></pre>
+</section>
+
+
+<!-- dnt -->
+<link rel="stylesheet" href="highlight/styles/monokai-sublime.css">
+<script src="highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="index.js"></script>
