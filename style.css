@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: url('background/people.png');
+  color: #333;
+  font-size: 24pt;
+  font-family: sans-serif;
+  padding: 10em 0;
+}
+
+a {
+  color: #06f;
+  text-decoration: none;
+  transition: color 333ms;
+}
+
+a:hover {
+  color: #09f;
+}
+
+em {
+  text-shadow: .05em .05em .1em #f06;
+  font-style: normal;
+}
+
+pre code {
+  opacity: 0.9;
+  outline: none;
+  border-radius: .25em;
+  transition: box-shadow 500ms, opacity 333ms;
+}
+
+pre code:hover {
+  opacity: 0.95;
+}
+
+pre code:focus {
+  opacity: 1;
+  box-shadow: 0 0 3em black;
+}
+
+pre code.highlight {
+  box-shadow: 0 0 3em #f0f;
+}
+
+section {
+  min-height: 800px;
+  width: 80%;
+  padding: .5em;
+  margin: auto;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  text-shadow: .05em .05em .1em #eee;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+pre code {
+  font-size: .8em;
+}
+
+aside {
+  color: #777;
+  font-size: .75em;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
