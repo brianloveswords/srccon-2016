@@ -15,12 +15,12 @@ function triggerHighlight() {
 function savePage() {
   let element = document.getElementById('content');
   let content = element.innerHTML;
-  localStorage.setItem('content', content);
+  sessionStorage.setItem('content', content);
 }
 
 function loadPage() {
   let element = document.getElementById('content');
-  let content = localStorage.getItem('content');
+  let content = sessionStorage.getItem('content');
   if (content && content.length) {
     element.innerHTML = content;
   }
@@ -29,9 +29,11 @@ function loadPage() {
 }
 
 function clickHandler(event) {
-  if (!event.metaKey) {
+  if (!event.metaKey && !event.shiftKey) {
     return true;
   }
+
+  event.preventDefault();
 
   savePage();
 
@@ -40,13 +42,7 @@ function clickHandler(event) {
 
   hljs.highlightBlock(event.target);
 
-  // let script = document.createElement('script');
-  // script.innerHTML = this.innerText;
-  // document.body.appendChild(script);
-
   window.eval(`{${this.innerText}}`);
-
-  return false;
 }
 
 function hookUpEventListeners() {
