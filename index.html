@@ -18,7 +18,9 @@
         <h1>Session Agenda</h1>
         <ul>
           <li><code>console</code> methods beyond <code>.log</code></li>
-          <li>Step debugger</li>
+          <li>How to read a stack trace</li>
+          <li>Using the step debugger</li>
+          <li>Event Listener breakpoints</li>
           <li>blackboxing</li>
           <li>Surface overview of other parts of devtools</li>
         </ul>
@@ -262,19 +264,20 @@ setTimeout(_ => {
         <h1><code>console.table()</code></h1>
         <h2>Sortable data in the console</h2>
         <pre><code class="js" contenteditable>
-// Using the new `fetch` API which is rad,
-// feel free to try it out.
+// Remember to turn on async stack traces
+
 fetch('albums.json')
   .then(response => response.json())
   .then(albums => {
     // Show everything
     console.table(albums);
 
-    // Only show a few fields
-    console.table(albums, ['album', 'year']);
+    // Show only selected fields
+    console.table(albums, ['year']);
   })
   .catch(e => console.error(e))
         </code></pre>
+        <aside>This uses the new <code>fetch</code> API which is way easier in simple cases than XHR, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">check out the docs on MDN</a>
       </section>
 
 
@@ -382,7 +385,7 @@ console.info('event listener added');
         <h1><code>blackboxing</code></h1>
         <pre><code class="js" contenteditable>
 // This function is provided by the hot new 10x framework, 'chaos.js'.
-// It flips a coin and on heads `throws` some unwanted saxophones
+// It flips a coin and `throws` some unwanted saxophones on heads
 
 // To blackbox this dumb, dumb script, go to devtools settings,
 // look for "blackboxing" on the right navigation.
@@ -400,6 +403,13 @@ chaos();
           going on at <a href="github.com/whatwg/console">github.com/whatwg/console</a>
         </p>
       </section>
+
+      <section>
+        <h1>Also see<br><code><a href="https://github.com/node-inspector/node-inspector">node-inspector</a></code></h1>
+      </section>
+
+      <center>💗</center>
+
     </div>
 
 
