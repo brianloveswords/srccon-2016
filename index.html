@@ -17,8 +17,8 @@
       <section>
         <h1>
           like follow subscribe at<br>
-          <a href="brianloveswords.github.io/srccon-2017">
-            brianloveswords.github.io/srccon-2017
+          <a href="//brianloveswords.github.io/srccon-2016">
+            brianloveswords.github.io/srccon-2016
           </a>
         </h1>
       </section>
@@ -206,17 +206,7 @@ fetch('albums.json')
       </section>
 
 
-      <section>
-        <h1>Event Listener Breakpoints</h1>
-        <pre><code class="js" contenteditable>
-document.body.addEventListener('mouseup', event => {
-  // remember to go into the Sources tab and turn on the mouseup
-  // event listener breakpoint. When it breaks, execution will be
-  // paused within this context.
-});
-console.info('event listener added');
-        </code></pre>
-      </section>
+
 
       <section>
         <h1>💸 Cache Problems 💸</h1>
@@ -228,47 +218,11 @@ console.info('event listener added');
 
 
 
-      <section>
-        <h1>Pause On Exception</h1>
-        <h2>Super useful when starting a new project</h2>
-        <pre><code class="js" contenteditable>
-  // Make sure to turn on Pause on Exception first
-  let x = {howDoWeDoIt: this};
-
-  console.log('this is gonna happen');
-
-  console.lag('oops that is not how you spell log');
-        </code></pre>
-
-        <aside>
-          Here's where it's not useful: when the libraries you are using are
-          flagrant about letting exceptions run wild. I think blackboxing
-          can fix that but I can't speak confidently to that yet.
-        </aside>
-      </section>
-
-
-      <section>
-        <h1><code>console.assert()</code></h1>
-        <pre><code class="js" contenteditable>
-let x = {howDoWeDoIt: this};
-
-console.assert(1 == 1, 'somehow math stopped working');
-
-console.assert(1 == 2, 'yep I guess math did stop working');
-        </code></pre>
-
-        <aside>
-          Currently triggers Pause On Exception in Chrome, Safari; not
-          in Firefox. I'm trying to fix that, see "standardization"
-          section.
-        </aside>
-      </section>
-
 
       <section>
         <h1><code>debugger</code></h1>
         <pre><code class="js" contenteditable>
+// This program is broken, let's find out why
 let foo = function(input) {
   console.info('entering foo');
   bar(`${input} ${input}`);
@@ -291,6 +245,60 @@ debugger;
 foo('return of the mack');
         </code></pre>
       </section>
+
+
+      <section>
+        <h1>Pause On Exception</h1>
+        <h2>Super useful when starting a new project</h2>
+        <pre><code class="js" contenteditable>
+  // Make sure to turn on Pause on Exception first
+  let x = {howDoWeDoIt: this};
+
+  console.log('this is gonna happen');
+
+  console.lag('oops that is not how you spell log');
+        </code></pre>
+
+        <aside>
+          Here's where it's not useful: when the libraries you are using are
+          flagrant about letting exceptions run wild. blackboxing
+          can fix that.
+        </aside>
+      </section>
+
+
+
+      <section>
+        <h1><code>console.assert()</code></h1>
+        <pre><code class="js" contenteditable>
+let x = {howDoWeDoIt: this};
+
+console.assert(1 == 1, 'somehow math stopped working');
+
+console.assert(1 == 2, 'yep I guess math did stop working');
+        </code></pre>
+
+        <aside>
+          Currently triggers Pause On Exception in Chrome, Safari; not
+          in Firefox. I'm trying to fix that, see "standardization"
+          section.
+        </aside>
+      </section>
+
+
+
+      <section>
+        <h1>Event Listener Breakpoints</h1>
+        <pre><code class="js" contenteditable>
+document.body.addEventListener('mouseup', event => {
+  // remember to go into the Sources tab and turn on the mouseup
+  // event listener breakpoint. When it breaks, execution will be
+  // paused within this context.
+});
+console.info('event listener added');
+        </code></pre>
+      </section>
+
 
 
       <section>
