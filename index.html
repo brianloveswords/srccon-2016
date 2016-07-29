@@ -15,6 +15,18 @@
 
 
       <section>
+        <h1>Who am I?</h1>
+      </section>
+
+
+
+      <section>
+        <h1>Who are you?</h1>
+      </section>
+
+
+
+      <section>
         <h1>
           like follow subscribe at<br>
           <a href="//brianloveswords.github.io/srccon-2016">
@@ -24,15 +36,29 @@
       </section>
 
 
+
       <section>
         <h1><em>shift+click</em> to execute code blocks</h1>
+        <h2>if shit gets weird, refresh the page</h2>
       </section>
 
 
       <section>
-        <h1>Introduction</h1>
+        <h1>Opening up DevTools</h1>
+        <h2>
+          View → Developer → Developer Tools<br>
+          Command + Option + I
+        </h2>
       </section>
 
+
+      <section>
+        <h1>Clearing the Console</h1>
+        <h2>
+          <code>clear()</code><br>
+          Control + L
+        </h2>
+      </section>
 
 
 
@@ -44,15 +70,21 @@
         <pre><code class="js" contenteditable>
 // Old standby
 console.log('this is normal');
+        </code></pre>
 
-// Styling with CSS!
-console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
-
+        <pre><code class="js" contenteditable>
 // Can take multiple arguments, will separate them with a space
 console.log('prefix:', {x: 'some object', y: 10}, 'then some more');
+        </code></pre>
 
+        <pre><code class="js" contenteditable>
 // Displaying element as HTML vs as an object
 console.log('HTML (%o) vs Object (%O)', document, document);
+        </code></pre>
+
+        <pre><code class="js" contenteditable>
+// Styling with CSS!
+console.log('%ca friggin travesty', 'font-size: 10em; color: red;');
         </code></pre>
       </section>
 
@@ -128,13 +160,15 @@ console.group('do the stuff');
 console.log('this is how we do it');
 console.trace();
 
-// Groups can be nested
+// Groups can be nested & formatters work!
 console.groupCollapsed('do more stuff');
 console.info('this is some information');
 console.error('oh shit');
 console.groupEnd();
 
 console.log('one last thing from the outside group');
+
+// Always make sure to end your groups
 console.groupEnd();
         </code></pre>
       </section>
@@ -166,14 +200,16 @@ setInterval(_ => {
         <h1>A solution I have used</h1>
         <pre><code class="js" contenteditable>
 let debug = function (prefix, msg, ...rest) {
-  // Short-circuit on production. Use a conditional build script
+  // Short-circuit on production. Use a build system
   // system to include a script that sets this global state.
   if (window.ENVIRONMENT === 'production') {
     return true;
   }
 
+  let style = 'font-weight: bold; color: #dcd;';
+
   console.log(`%c:${prefix}:%c ${msg}`,
-              'font-weight: bold; color: #dcd;', '', ...rest);
+              style, '', ...rest);
 }
 
 setInterval(_ => debug('noise', Date.now()), 2000);
@@ -214,6 +250,7 @@ fetch('albums.json')
           <li>Network tab → Disable cache</li>
           <li>Application tab → Clear storage</li>
         </ul>
+        <aside>Especially useful when working with responsive images</aside>
       </section>
 
 
@@ -224,24 +261,23 @@ fetch('albums.json')
         <pre><code class="js" contenteditable>
 // This program is broken, let's find out why
 let foo = function(input) {
-  console.info('entering foo');
+  console.info('entering foo, once again');
   bar(`${input} ${input}`);
 }
 
 let bar = function(input) {
-  console.info('entering bar');
+  console.info('entering bar, pump up the world');
   let parts = input.split(' ');
   parts.push(parts[0]);
   baz(parts.join(' '));
 }
 
 let baz = function(input) {
-  console.info('entering baz');
+  console.info('entering baz, watch my flow');
 
-  console.log(`${input} you know that I'll be back`);
+  console.log(`🎶 ${input} you know that I'll be back 🎶`);
 }
 
-debugger;
 foo('return of the mack');
         </code></pre>
       </section>
@@ -249,14 +285,15 @@ foo('return of the mack');
 
       <section>
         <h1>Pause On Exception</h1>
-        <h2>Super useful when starting a new project</h2>
         <pre><code class="js" contenteditable>
   // Make sure to turn on Pause on Exception first
   let x = {howDoWeDoIt: this};
 
   console.log('this is gonna happen');
 
-  console.lag('oops that is not how you spell log');
+  undefined('i bet this is a function');
+
+  console.log('never gonna get here');
         </code></pre>
 
         <aside>
@@ -276,6 +313,8 @@ let x = {howDoWeDoIt: this};
 console.assert(1 == 1, 'somehow math stopped working');
 
 console.assert(1 == 2, 'yep I guess math did stop working');
+
+console.log('assert does not cause abrupt completion');
         </code></pre>
 
         <aside>
@@ -294,6 +333,9 @@ document.body.addEventListener('mouseup', event => {
   // remember to go into the Sources tab and turn on the mouseup
   // event listener breakpoint. When it breaks, execution will be
   // paused within this context.
+  let time = Date.now();
+  let element = event.target;
+  console.log(`${time}: %O`, element);
 });
 console.info('event listener added');
         </code></pre>
@@ -304,6 +346,12 @@ console.info('event listener added');
       <section>
         <h1><code>blackboxing</code></h1>
         <pre><code class="js" contenteditable>
+// This function is provided by the hot new 10x framework, 'chaos.js'.
+// It flips a coin and on heads `throws` some unwanted saxophones
+
+// To blackbox this dumb, dumb script, go to devtools settings,
+// look for "blackboxing" on the right navigation.
+chaos();
         </code></pre>
       </section>
 
@@ -324,5 +372,6 @@ console.info('event listener added');
     <script>hljs.initHighlightingOnLoad();</script>
 
     <script src="index.js"></script>
+    <script src="chaos.js"></script>
   </body>
 </html>
