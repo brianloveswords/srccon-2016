@@ -2,73 +2,8 @@
 <html>
 <head>
   <meta charset="utf8">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      background: url('background/people.png');
-      color: #333;
-      font-size: 24pt;
-      font-family: sans-serif;
-      padding: 5em 0;
-    }
-
-    pre code {
-      opacity: 0.9;
-      transition: outline 500ms, opacity 333ms;
-    }
-
-    pre code:hover {
-      opacity: 0.95;
-    }
-
-    pre code:focus {
-      opacity: 1;
-      outline: .25em solid papayawhip;
-    }
-
-    pre code.highlight {
-      outline: .5em solid #f0f;
-      transition: outline 500ms;
-    }
-
-    section {
-      min-height: 800px;
-      width: 80%;
-      padding: .5em;
-      margin: auto;
-    }
-
-    h1,h2,h3 {
-      text-align: center;
-      text-shadow: .05em .05em .1em #eee;
-    }
-
-    h1 {
-      font-size: 2em;
-    }
-
-    h2 {
-      font-size: 1.5em;
-    }
-
-    pre code {
-      font-size: .8em;
-    }
-
-    aside {
-      color: #777;
-      font-size: .75em;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-  </style>
+  <link rel="stylesheet" href="highlight/styles/monokai-sublime.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -87,7 +22,7 @@
   <h1><code>console.log()</code></h1>
   <h2>Alternate call signatures & formatters</h2>
 
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 // Old standby
 console.log('this is normal');
 
@@ -108,7 +43,7 @@ console.log('HTML (%o) vs Object (%O)', document, document);
   <h1><code>console.dir()</code></h1>
   <h2>Alias for <code>console.log('%O', thing)</code></h2>
   <p>When I'm logging objects, I tend to use this over console.log because I usually want to inspect properties and I care less about HTML representation.</p>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 // Explore the HTML contained in the document
 console.log(document);
 
@@ -124,7 +59,7 @@ console.dir(document);
   <h1><code>console.info()<br>console.warn()</code></h1>
   <h2>Some preset style, useful with filters</h2>
 
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 console.info('this is some information that might be useful, whatever');
 
 console.warn('this could be an issue');
@@ -139,7 +74,7 @@ console.warn('%calso supports formatters', 'color: #f0f');
 <section>
   <h1><code>console.error()<br>console.trace()</code></h1>
   <h2>Stack traces!</h2>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 let foo = function() {
   console.info('entering foo');
   bar();
@@ -167,7 +102,7 @@ foo();
   <h1><code>console.group()<br>console.groupCollapsed()</code></h1>
   <h2>Group logs into a collapsable object</h2>
 
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 // Until console.groupEnd() is called, every `console.*` call
 // will end up in a collapsable group.
 console.group('do the stuff');
@@ -190,7 +125,7 @@ console.groupEnd();
 <!-- console.group, pt2  -->
 <section>
   <h1>...doesn't work great async :(</h1>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 setInterval(_ => {
   console.group('time1');
   console.log('this is a member of time1');
@@ -210,7 +145,7 @@ setInterval(_ => {
 <!-- console.group, pt3  -->
 <section>
   <h1>A solution I have used</h1>
-    <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 let debug = function (prefix, msg, ...rest) {
   // Short-circuit on production. Use a conditional build script
   // system to include a script that sets this global state.
@@ -235,7 +170,7 @@ setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
 <section>
   <h1><code>console.table()</code></h1>
   <h2>Sortable data in the console</h2>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 // Using the new `fetch` API which is rad,
 // feel free to try it out.
 fetch('albums.json')
@@ -254,7 +189,7 @@ fetch('albums.json')
 
 <section>
   <h1>Event Listener Breakpoints</h1>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 document.body.addEventListener('mouseup', event => {
   // remember to go into the Sources tab and turn on the mouseup
   // event listener breakpoint. When it breaks, execution will be
@@ -279,7 +214,7 @@ console.info('event listener added');
 <section>
   <h1>Pause On Exception</h1>
   <h2>Super useful when starting a new project</h2>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
   // Make sure to turn on Pause on Exception first
   let x = {howDoWeDoIt: this};
 
@@ -298,7 +233,7 @@ console.info('event listener added');
 
 <section>
   <h1><code>console.assert()</code></h1>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
 let x = {howDoWeDoIt: this};
 
 console.assert(1 == 1, 'somehow math stopped working');
@@ -315,7 +250,7 @@ console.assert(1 == 2, 'yep I guess math did stop working');
 
 <section>
   <h1><code>debugger</code> driven development</h1>
-  <pre><code contenteditable>
+  <pre><code class="js" contenteditable>
   </code></pre>
 </section>
 
@@ -330,9 +265,6 @@ console.assert(1 == 2, 'yep I guess math did stop working');
 
 
 
-
-
-<link rel="stylesheet" href="highlight/styles/monokai-sublime.css">
 <script src="highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script src="index.js"></script>

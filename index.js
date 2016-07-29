@@ -38,6 +38,8 @@ function clickHandler(event) {
   this.classList.add('highlight');
   setTimeout( _ => this.classList.remove('highlight'), 500);
 
+  hljs.highlightBlock(event.target);
+
   // let script = document.createElement('script');
   // script.innerHTML = this.innerText;
   // document.body.appendChild(script);
