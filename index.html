@@ -1,67 +1,72 @@
-<style>
-  * {
-    box-sizing: border-box;
-  }
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    font-size: 12pt;
-    font-family: sans-serif;
-    padding-bottom: 10em;
-  }
+    body {
+      background: url('background/people.png');
+      color: #333;
+      font-size: 24pt;
+      font-family: sans-serif;
+      padding: 5em 0;
+    }
 
-  pre code {
-    opacity: 0.9;
-    transition: outline 500ms, opacity 333ms;
-  }
+    pre code {
+      opacity: 0.9;
+      transition: outline 500ms, opacity 333ms;
+    }
 
-  pre code:hover {
-    opacity: 0.95;
-  }
+    pre code:hover {
+      opacity: 0.95;
+    }
 
+    pre code:focus {
+      opacity: 1;
+      outline: .25em solid papayawhip;
+    }
 
-  pre code:focus {
-    opacity: 1;
-    outline: .25em solid papayawhip;
-  }
+    pre code.highlight {
+      outline: .5em solid #f0f;
+      transition: outline 500ms;
+    }
 
+    section {
+      min-height: 800px;
+      width: 1000px;
+      padding: .5em;
+      margin: auto;
+    }
 
-  pre code.highlight {
-    outline: .5em solid #f0f;
-    transition: outline 500ms;
-  }
+    h1,h2,h3 {
+      text-align: center;
+      text-shadow: .05em .05em .1em #eee;
+    }
 
-  section {
-    min-height: 800px;
-    width: 1000px;
-    padding: 1em;
-    margin: auto;
-    border-bottom: 1px solid #fefefe;
-  }
+    h1 {
+      font-size: 2em;
+    }
 
-  h1,h2,h3 {
-    text-align: center;
-  }
+    h2 {
+      font-size: 1.5em;
+    }
 
-  h1 {
-    font-size: 4em;
-  }
+    pre code {
+      font-size: .8em;
+    }
 
-  h2 {
-    font-size: 3em;
-  }
+    .hidden {
+      display: none;
+    }
 
-  pre code {
-    font-size: 1.4em;
-  }
+  </style>
+</head>
 
-  .hidden {
-    display: none;
-  }
-
-</style>
-
+<body>
 <div id="content">
-
 <section>
   <h1>Beyond <code>console.log</code></h1>
   <h2>Making the most of your developer tools</h2>
@@ -153,20 +158,32 @@ foo();
 
 <!-- console.group  -->
 <section>
-  <h1><code>console.group()</code></h1>
+  <h1><code>console.group()<br>console.groupCollapsed()</code></h1>
+  <h2>Group logs into a collapsable object</h2>
+
   <pre><code contenteditable>
+// Until console.groupEnd() is called, every `console.*` call
+// will end up in a collapsable group.
 console.group('do the stuff');
-// Until console.groupEnd() is called, every `console.*` call will end up in a
-// collapsable group called 'do the stuff'
 console.log('this is how we do it');
-console.trace('trace from doingTheStuff');
+console.trace();
+
+// Groups can be nested
+console.groupCollapsed('do more stuff');
+console.info('this is some information');
+console.error('oh shit');
+console.groupEnd();
+
+console.log('one last thing from the outside group');
 console.groupEnd();
   </code></pre>
 </section>
 
+
+
 <!-- console.group, pt2  -->
 <section>
-  <h1>Doesn't work great async though</h1>
+  <h1>...doesn't work great async :(</h1>
   <pre><code contenteditable>
 setInterval(_ => {
   console.group('time1');
@@ -181,6 +198,7 @@ setInterval(_ => {
 }, 911);
   </code></pre>
 </section>
+
 
 
 <!-- console.group, pt3  -->
@@ -205,15 +223,52 @@ setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
   </code></pre>
 </section>
 
+
+<!-- console.table -->
+
+<section>
+  <h1><code>console.table()</code></h1>
+  <h2>Sortable data in the console</h2>
+  <pre><code contenteditable>
+fetch('albums.json')
+  .then(r => r.json())
+  .then(content => {
+    // Show everything
+    console.table(content);
+
+    // Only show a few fields
+    console.table(content, ['album', 'year']);
+  })
+  .catch(e => console.error(e))
+  </code></pre>
+</section>
+
+
 <section>
   <h1>Event Listener Breakpoints</h1>
+  <pre><code contenteditable>
+document.body.addEventListener('mouseup', event => {
+  // remember to go into the Sources tab and turn on the mouseup
+  // event listener breakpoint. When it breaks, execution will be
+  // paused within this context.
+});
+  </code></pre>
 </section>
 
 </div>
 
+<section>
+  <h1>💸 Cache Problems 💸</h1>
+  <ul>
+    <li>Network tab → Disable cache</li>
+    <li>Application tab → Clear storage</li>
+  </ul>
+</section>
 
-<!-- dnt -->
+
 <link rel="stylesheet" href="highlight/styles/monokai-sublime.css">
 <script src="highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script src="index.js"></script>
+</body>
+</html>
