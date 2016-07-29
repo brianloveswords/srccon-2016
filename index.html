@@ -15,6 +15,22 @@
 
 
       <section>
+        <h1>Session Agenda</h1>
+        <ul>
+          <li><code>console</code> methods beyond <code>.log</code></li>
+          <li>Step debugger</li>
+          <li>blackboxing</li>
+          <li>Surface overview of other parts of devtools</li>
+        </ul>
+      </section>
+
+
+      <section>
+        <h1>Session Goal</h1>
+        <h2>Spark the 🔥 in your 💗 to explore your dev tools</h2>
+      </section>
+
+      <section>
         <h1>Who am I?</h1>
       </section>
 
@@ -23,7 +39,6 @@
       <section>
         <h1>Who are you?</h1>
       </section>
-
 
 
       <section>
@@ -177,8 +192,10 @@ console.groupEnd();
 
       <!-- console.group, pt2  -->
       <section>
-        <h1>...doesn't work great async :(</h1>
+        <h1>async, blegh</h1>
         <pre><code class="js" contenteditable>
+// Not ideal imo
+
 setInterval(_ => {
   console.group('time1');
   console.log('this is a member of time1');
@@ -220,7 +237,26 @@ setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
       </section>
 
 
-      <!-- console.table -->
+
+      <section>
+        <h1><code>console.time()<br>console.timeEnd()</code></h1>
+        <pre><code class="js" contenteditable>
+console.time('social-construct');
+
+// Multiple timers are totally fine as long as
+// they have different names
+console.time('message')
+console.info('time is a social construct');
+console.timeEnd('message')
+
+setTimeout(_ => {
+  console.info('%c...or is it?', 'font-style: italic');
+  console.timeEnd('social-construct');
+}, 2000)
+        </code></pre>
+      </section>
+
+
 
       <section>
         <h1><code>console.table()</code></h1>
@@ -240,7 +276,6 @@ fetch('albums.json')
   .catch(e => console.error(e))
         </code></pre>
       </section>
-
 
 
 
