@@ -36,7 +36,7 @@
 
     section {
       min-height: 800px;
-      width: 1000px;
+      width: 80%;
       padding: .5em;
       margin: auto;
     }
@@ -56,6 +56,12 @@
 
     pre code {
       font-size: .8em;
+    }
+
+    aside {
+      color: #777;
+      font-size: .75em;
+      font-weight: bold;
     }
 
     .hidden {
@@ -134,17 +140,17 @@ console.warn('%calso supports formatters', 'color: #f0f');
   <h1><code>console.error()<br>console.trace()</code></h1>
   <h2>Stack traces!</h2>
   <pre><code contenteditable>
-function foo() {
+let foo = function() {
   console.info('entering foo');
   bar();
 }
 
-function bar() {
+let bar = function() {
   console.info('entering bar');
   baz();
 }
 
-function baz() {
+let baz = function() {
   console.info('entering baz');
   console.trace('from baz');
   console.error('this should not have happened');
@@ -205,7 +211,7 @@ setInterval(_ => {
 <section>
   <h1>A solution I have used</h1>
     <pre><code contenteditable>
-function debug(prefix, msg, ...rest) {
+let debug = function (prefix, msg, ...rest) {
   // Short-circuit on production. Use a conditional build script
   // system to include a script that sets this global state.
   if (window.ENVIRONMENT === 'production') {
@@ -230,14 +236,16 @@ setInterval(_ => debug('module3', 'definitely aliens on the ship'), 5000);
   <h1><code>console.table()</code></h1>
   <h2>Sortable data in the console</h2>
   <pre><code contenteditable>
+// Using the new `fetch` API which is rad,
+// feel free to try it out.
 fetch('albums.json')
-  .then(r => r.json())
-  .then(content => {
+  .then(response => response.json())
+  .then(albums => {
     // Show everything
-    console.table(content);
+    console.table(albums);
 
     // Only show a few fields
-    console.table(content, ['album', 'year']);
+    console.table(albums, ['album', 'year']);
   })
   .catch(e => console.error(e))
   </code></pre>
@@ -252,6 +260,7 @@ document.body.addEventListener('mouseup', event => {
   // event listener breakpoint. When it breaks, execution will be
   // paused within this context.
 });
+console.info('event listener added');
   </code></pre>
 </section>
 
@@ -264,6 +273,63 @@ document.body.addEventListener('mouseup', event => {
     <li>Application tab → Clear storage</li>
   </ul>
 </section>
+
+
+
+<section>
+  <h1>Pause On Exception</h1>
+  <h2>Super useful when starting a new project</h2>
+  <pre><code contenteditable>
+  // Make sure to turn on Pause on Exception first
+  let x = {howDoWeDoIt: this};
+
+  console.log('this is gonna happen');
+
+  console.lag('oops that is not how you spell log');
+  </code></pre>
+
+  <aside>
+    Here's where it's not useful: when the libraries you are using are
+    flagrant about letting exceptions run wild. I think blackboxing
+    can fix that but I can't speak confidently to that yet.
+  </aside>
+</section>
+
+
+<section>
+  <h1><code>console.assert()</code></h1>
+  <pre><code contenteditable>
+let x = {howDoWeDoIt: this};
+
+console.assert(1 == 1, 'somehow math stopped working');
+
+console.assert(1 == 2, 'yep I guess math did stop working');
+  </code></pre>
+  <p>
+    Currently triggers Pause On Exception in Chrome, Safari; not in
+    Firefox. I'm trying to fix that.
+  </p>
+
+</section>
+
+
+<section>
+  <h1><code>debugger</code> driven development</h1>
+  <pre><code contenteditable>
+  </code></pre>
+</section>
+
+
+<section>
+  <h1>Standardization</h1>
+  <h2>
+    i.e. there's a reason I did this all this shit in Chrome at a
+    Mozilla conference
+  </h2>
+</section>
+
+
+
 
 
 <link rel="stylesheet" href="highlight/styles/monokai-sublime.css">

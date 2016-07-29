@@ -42,7 +42,7 @@ function clickHandler(event) {
   // script.innerHTML = this.innerText;
   // document.body.appendChild(script);
 
-  window.eval(this.innerText);
+  window.eval(`{${this.innerText}}`);
 
   return false;
 }
